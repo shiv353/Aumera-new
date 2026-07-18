@@ -12,8 +12,12 @@ const normalizeProductData = (body) => {
       .filter(Boolean);
   }
 
-  if (typeof normalized.rating === "string" && normalized.rating.trim() !== "") {
-    normalized.rating = Number(normalized.rating);
+  if (typeof normalized.quantity === "string" && normalized.quantity.trim() !== "") {
+    normalized.quantity = Number(normalized.quantity);
+  }
+
+  if (typeof normalized.contains === "string") {
+    normalized.contains = normalized.contains.trim();
   }
 
   return normalized;
@@ -29,7 +33,7 @@ export async function GET(request, { params }) {
       const product = await Product.findById(id).lean();
       console.log(`[api] DB lookup result for ${id}:`, !!product);
       if (!product) return new Response(JSON.stringify({ error: "Product not found" }), { status: 404 });
-      return new Response(JSON.stringify(product), { status: 200, headers: { "Content-Type": "application/json" } });
+      return new Response(JSON.stringify({ ...product, _id: String(product._id) }), { status: 200, headers: { "Content-Type": "application/json" } });
     }
 
     const product = localProducts.find((p) => String(p._id) === String(id));
@@ -53,7 +57,8 @@ export async function PATCH(request, { params }) {
       const product = await Product.findByIdAndUpdate(id, { $set: normalizeProductData(body) }, { new: true, runValidators: true });
 
       if (!product) return new Response(JSON.stringify({ error: "Product not found" }), { status: 404 });
-      return new Response(JSON.stringify(product), { status: 200, headers: { "Content-Type": "application/json" } });
+      const plainProduct = product.toObject ? product.toObject() : product;
+      return new Response(JSON.stringify({ ...plainProduct, _id: String(plainProduct._id) }), { status: 200, headers: { "Content-Type": "application/json" } });
     }
 
     const index = localProducts.findIndex((p) => String(p._id) === String(id));

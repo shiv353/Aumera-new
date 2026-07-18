@@ -12,8 +12,12 @@ const normalizeProductData = (body) => {
       .filter(Boolean);
   }
 
-  if (typeof normalized.rating === "string" && normalized.rating.trim() !== "") {
-    normalized.rating = Number(normalized.rating);
+  if (typeof normalized.quantity === "string" && normalized.quantity.trim() !== "") {
+    normalized.quantity = Number(normalized.quantity);
+  }
+
+  if (typeof normalized.contains === "string") {
+    normalized.contains = normalized.contains.trim();
   }
 
   return normalized;
@@ -24,7 +28,6 @@ export async function GET(request) {
     const url = new URL(request.url);
     const page = parseInt(url.searchParams.get("page") || "1", 10);
     const limit = parseInt(url.searchParams.get("limit") || "12", 10);
-    const topRated = url.searchParams.get("topRated") === "true";
 
     if (process.env.MONGODB_URI) {
       await dbConnect();
@@ -32,8 +35,11 @@ export async function GET(request) {
       const total = await Product.countDocuments(query);
       const totalPages = Math.max(Math.ceil(total / limit), 1);
       const skip = (Math.max(page, 1) - 1) * limit;
-      const sort = topRated ? { rating: -1, createdAt: -1 } : { createdAt: -1 };
-      const products = await Product.find(query).sort(sort).skip(skip).limit(limit).lean();
+      const sort = { createdAt: -1 };
+      const products = (await Product.find(query).sort(sort).skip(skip).limit(limit).lean()).map((product) => ({
+        ...product,
+        _id: String(product._id),
+      }));
 
       return new Response(JSON.stringify({ products, total, totalPages, page, limit }), {
         status: 200,
@@ -41,10 +47,7 @@ export async function GET(request) {
       });
     }
 
-    const sorted = [...localProducts].sort((a, b) => {
-      if (topRated) return (b.rating || 0) - (a.rating || 0) || new Date(b.createdAt) - new Date(a.createdAt);
-      return new Date(b.createdAt) - new Date(a.createdAt);
-    });
+    const sorted = [...localProducts].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     const total = sorted.length;
     const totalPages = Math.max(Math.ceil(total / limit), 1);
     const skip = (Math.max(page, 1) - 1) * limit;
@@ -72,8 +75,9 @@ export async function POST(request) {
         createdAt: new Date(),
         updatedAt: new Date()
       });
+      const plainCreatedProduct = createdProduct.toObject ? createdProduct.toObject() : createdProduct;
 
-      return new Response(JSON.stringify(createdProduct), {
+      return new Response(JSON.stringify({ ...plainCreatedProduct, _id: String(plainCreatedProduct._id) }), {
         status: 201,
         headers: { "Content-Type": "application/json" }
       });

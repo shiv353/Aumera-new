@@ -11,7 +11,8 @@ const products = [
     alt: "Premium desk accessories gift set",
     description: "A thoughtfully curated hamper with premium desk accessories for the modern professional.",
     category: "Hampers",
-    rating: 4.7,
+    quantity: 12,
+    contains: "Premium desk accessories;Elegant packaging;Thoughtful stationery",
     createdAt: new Date().toISOString()
   },
   {
@@ -26,7 +27,8 @@ const products = [
     alt: "Festive gift box with wrapped items",
     description: "Seasonal premium selection with refined packaging and curated treats.",
     category: "Gift Sets",
-    rating: 4.8,
+    quantity: 8,
+    contains: "Luxury wrapping;Curated treats;Festive accessories",
     createdAt: new Date().toISOString()
   },
   {
@@ -41,7 +43,8 @@ const products = [
     alt: "Wellness gift products with candles and skincare",
     description: "Calming self-care items including candles, tea, and skincare for a restorative experience.",
     category: "Self Care",
-    rating: 4.6,
+    quantity: 15,
+    contains: "Skincare essentials;Tea blend;Aromatherapy candle",
     createdAt: new Date().toISOString()
   },
   {
@@ -56,7 +59,8 @@ const products = [
     alt: "Artisan food treats in a gift arrangement",
     description: "A selection of small-batch artisan treats sourced from local producers.",
     category: "Treats",
-    rating: 4.5,
+    quantity: 10,
+    contains: "Artisan chocolates;Local snacks;Handcrafted packaging",
     createdAt: new Date().toISOString()
   },
   {
@@ -71,7 +75,8 @@ const products = [
     alt: "Modern workplace kit with notebooks and devices",
     description: "Welcome kit for new joiners including stationery, a mug, and onboarding essentials.",
     category: "Corporate",
-    rating: 4.4,
+    quantity: 6,
+    contains: "Notebook set;Travel mug;Welcome card",
     createdAt: new Date().toISOString()
   }
 ];

@@ -21,7 +21,8 @@ export async function GET() {
       alt: p.alt,
       description: p.description,
       category: p.category,
-      rating: p.rating
+      quantity: p.quantity ?? p.rating ?? 0,
+      contains: p.contains ?? ""
     })));
 
     return new Response(JSON.stringify({ inserted: created.length }), { status: 201 });

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Corporate() {
     return (
       <section className="bg-[#0A3323] text-[#F7F4D5] px-8 md:px-20 py-32">
@@ -25,9 +27,12 @@ export default function Corporate() {
           </p>
   
   
-          <button className="border border-[#F7F4D5] px-10 py-4 rounded-full hover:bg-[#F7F4D5] hover:text-[#0A3323] transition">
+          <Link
+            href="/corporate"
+            className="inline-flex items-center justify-center border border-[#F7F4D5] px-10 py-4 rounded-full hover:bg-[#F7F4D5] hover:text-[#0A3323] transition"
+          >
             Enquire Now
-          </button>
+          </Link>
   
   
         </div>

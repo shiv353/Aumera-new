@@ -17,7 +17,7 @@ type Product = {
   alt?: string;
   description?: string;
   category?: string;
-  rating?: number;
+  quantity?: number;
 };
 
 export default function ProductList() {
@@ -28,13 +28,12 @@ export default function ProductList() {
   const [pageSize, setPageSize] = useState<number>(DEFAULT_PAGE_SIZE);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [topRated, setTopRated] = useState<boolean>(false);
 
-  const fetchProducts = async (pageNumber: number, limit: number = pageSize, top: boolean = topRated) => {
+  const fetchProducts = async (pageNumber: number, limit: number = pageSize) => {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`/api/products?page=${pageNumber}&limit=${limit}${top ? '&topRated=true' : ''}`);
+      const res = await fetch(`/api/products?page=${pageNumber}&limit=${limit}`);
       if (!res.ok) throw new Error("Failed to load products");
       const data = await res.json();
       setProducts(data.products);
@@ -50,12 +49,6 @@ export default function ProductList() {
   useEffect(() => {
     fetchProducts(page);
   }, [page]);
-
-  useEffect(() => {
-    // refetch when topRated toggles
-    setPage(1);
-    fetchProducts(1, pageSize, topRated);
-  }, [topRated]);
 
   useEffect(() => {
     const setSize = () => {
@@ -90,16 +83,31 @@ export default function ProductList() {
         <p className="text-[#839958] tracking-[5px] text-sm mb-5">Curated collection</p>
         <h2 className="text-4xl">All Products</h2>
         <p className="max-w-2xl mx-auto mt-4">Browse our full range of premium gifts with thoughtful curation and top-rated selections.</p>
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <button onClick={() => setTopRated((v) => !v)} className={`px-4 py-2 rounded ${topRated ? 'bg-[#839958] text-white' : 'bg-[#F7F4D5] text-[#0A3323]'}`}>
             {topRated ? 'Showing Top Rated' : 'Show Top Rated'}
           </button>
-        </div>
+        </div> */}
       </div>
 
       {loading && (
-        <div className="loader-shell">
-          <div className="loader-ring" aria-label="Loading products"></div>
+        <div className="px-8 md:px-20">
+          <div className="mb-6 flex items-center justify-between">
+            <div className="h-3 w-24 rounded-full bg-[#E8E2C8]" />
+            <div className="h-3 w-16 rounded-full bg-[#E8E2C8]" />
+          </div>
+
+          <div className="grid gap-10 md:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <div key={index} className="animate-pulse rounded-[25px] bg-[#F7F4D5] p-6 shadow-md">
+                <div className="mb-6 h-[260px] rounded-[18px] bg-[#E8E2C8]" />
+                <div className="mb-3 h-6 w-3/4 rounded-full bg-[#E8E2C8]" />
+                <div className="mb-2 h-3 rounded-full bg-[#E8E2C8]" />
+                <div className="mb-2 h-3 w-5/6 rounded-full bg-[#E8E2C8]" />
+                <div className="h-3 w-2/3 rounded-full bg-[#E8E2C8]" />
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
@@ -110,8 +118,9 @@ export default function ProductList() {
       )}
 
       {!loading && !error && products.length === 0 && (
-        <div className="loader-shell">
-          <p>No products available.</p>
+        <div className="mx-auto max-w-md rounded-[24px] border border-[#E8E2C8] bg-[#F7F4D5] px-8 py-12 text-center text-[#0A3323] shadow-sm">
+          <p className="text-lg font-medium">No products available right now.</p>
+          <p className="mt-2 text-sm text-[#5f6c41]">Please check back soon for fresh collections.</p>
         </div>
       )}
 
@@ -130,7 +139,7 @@ export default function ProductList() {
                   </div>
                   <div className="mt-auto flex items-center justify-between">
                     <span className="text-xl">{product.price}</span>
-                    <span className="text-sm">{(product.rating ?? 0).toFixed(1)}★</span>
+                    <span className="text-sm">Qty: {product.quantity ?? 0}</span>
                   </div>
                 </article>
               </Link>

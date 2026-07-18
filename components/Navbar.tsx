@@ -2,27 +2,33 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  
+  const isHomePage = pathname === "/";
+  const isSolidHeader = !isHomePage || scrolled;
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  
+  useEffect(() => {
+    setScrolled(false);
+  }, [pathname]);
 
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        scrolled
+        isSolidHeader
           ? "bg-[#0A3323] shadow-xl py-4"
           : "bg-transparent py-6"
       }`}
@@ -55,7 +61,7 @@ export default function Navbar() {
             Products
           </Link>
 
-          <Link href="#" className="text-[#F7F4D5] hover:text-[#839958] transition">
+          <Link href="/corporate" className="text-[#F7F4D5] hover:text-[#839958] transition">
             Corporate
           </Link>
 
@@ -63,7 +69,7 @@ export default function Navbar() {
             About
           </Link>
 
-          <Link href="#" className="text-[#F7F4D5] hover:text-[#839958] transition">
+          <Link href="/contact" className="text-[#F7F4D5] hover:text-[#839958] transition">
             Contact
           </Link>
 
@@ -71,7 +77,7 @@ export default function Navbar() {
 
         {/* Button */}
 
-        <a
+        {/* <a
           href="https://wa.me/917016731747?text=Hi%20The%20Aumera%20Gifts!%20I'd%20like%20to%20place%20an%20order."
           target="_blank"
           rel="noopener noreferrer"
@@ -89,7 +95,7 @@ export default function Navbar() {
           "
         >
           Order Now
-        </a>
+        </a> */}
 
       </div>
     </header>
