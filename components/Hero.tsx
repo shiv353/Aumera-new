@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 
 const images = [
@@ -127,15 +128,24 @@ export default function Hero() {
 
 
 
-          <button className="
-            bg-[#F7F4D5]
-            text-[#0A3323]
-            px-10
-            py-4
-            rounded-full
-          ">
-            Explore Collections
-          </button>
+          <Link href="/products">
+  <button
+    className="
+      bg-[#F7F4D5]
+      text-[#0A3323]
+      px-10
+      py-4
+      rounded-full
+      transition-all
+      duration-300
+      hover:bg-[#839958]
+      hover:text-white
+      hover:scale-105
+    "
+  >
+    Explore Collections
+  </button>
+</Link>
 
 
         </div>

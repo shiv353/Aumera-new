@@ -4,6 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "The Aumera Gifts",
   description: "Luxury gifting curated with love.",
+  icons: {
+    icon: "/aumera-submark.png",
+  },
 };
 
 export default function RootLayout({
