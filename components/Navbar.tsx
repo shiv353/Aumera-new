@@ -1,15 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const isHomePage = pathname === "/";
-  const isSolidHeader = !isHomePage || scrolled;
+  const isSolidHeader = !isHomePage || scrolled || isMenuOpen;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +26,7 @@ export default function Navbar() {
 
   useEffect(() => {
     setScrolled(false);
+    setIsMenuOpen(false);
   }, [pathname]);
 
   // Navigation Link Class
@@ -35,7 +38,8 @@ export default function Navbar() {
 
     return `
       relative
-      pb-2
+      block
+      py-2
       transition-all
       duration-300
       ${
@@ -70,66 +74,78 @@ export default function Navbar() {
           : "bg-transparent py-6"
       }`}
     >
-      <div className="relative max-w-7xl mx-auto px-8 md:px-16 flex items-center justify-between">
-
-        {/* Logo */}
-        <Link href="/">
-          <img
-            src="/logo.png"
-            alt="The Aumera Gifts"
-            className="w-[145px] h-[45px] object-contain cursor-pointer"
-          />
-        </Link>
-
-        {/* Menu */}
-        <nav className="hidden lg:flex items-center gap-10 text-sm uppercase tracking-[3px]">
-
-          <Link href="/" className={navLinkClass("/")}>
-            Home
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-8 md:px-16">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/">
+            <img
+              src="/logo.png"
+              alt="The Aumera Gifts"
+              className="w-[145px] h-[45px] object-contain cursor-pointer"
+            />
           </Link>
 
-          {/* <Link href="/rakhi" className={navLinkClass("/rakhi")}>
-            Rakhi
-          </Link> */}
+          {/* Desktop Menu */}
+          <nav className="hidden lg:flex items-center gap-10 text-sm uppercase tracking-[3px]">
+            <Link href="/" className={navLinkClass("/")}>
+              Home
+            </Link>
 
-          <Link href="/products" className={navLinkClass("/products")}>
-            Products
-          </Link>
+            <Link href="/products" className={navLinkClass("/products")}>
+              Products
+            </Link>
 
-          <Link href="/corporate" className={navLinkClass("/corporate")}>
-            Corporate
-          </Link>
+            <Link href="/corporate" className={navLinkClass("/corporate")}>
+              Corporate
+            </Link>
 
-          <Link href="/about" className={navLinkClass("/about")}>
-            About
-          </Link>
+            <Link href="/about" className={navLinkClass("/about")}>
+              About
+            </Link>
 
-          <Link href="/contact" className={navLinkClass("/contact")}>
-            Contact
-          </Link>
+            <Link href="/contact" className={navLinkClass("/contact")}>
+              Contact
+            </Link>
+          </nav>
 
-        </nav>
+          {/* Mobile Menu Toggle */}
+          <button
+            type="button"
+            aria-label="Toggle navigation"
+            aria-expanded={isMenuOpen}
+            className="lg:hidden inline-flex items-center justify-center rounded-full border border-[#F7F4D5]/30 bg-[#0A3323]/70 p-2 text-[#F7F4D5] shadow-sm backdrop-blur-sm"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+          >
+            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
 
-        {/* Button */}
-        {/* <a
-          href="https://wa.me/917016731747?text=Hi%20The%20Aumera%20Gifts!%20I'd%20like%20to%20place%20an%20order."
-          target="_blank"
-          rel="noopener noreferrer"
-          className="
-            bg-[#F7F4D5]
-            text-[#0A3323]
-            px-6
-            py-3
-            rounded-full
-            font-medium
-            hover:bg-[#839958]
-            hover:text-white
-            transition-all
-            duration-300
-          "
-        >
-          Order Now
-        </a> */}
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="lg:hidden mt-3 rounded-2xl border border-[#F7F4D5]/15 bg-[#0A3323]/95 p-4 shadow-2xl backdrop-blur-sm">
+            <div className="flex flex-col gap-1 text-sm uppercase tracking-[2px]">
+              <Link href="/" className={navLinkClass("/" )} onClick={() => setIsMenuOpen(false)}>
+                Home
+              </Link>
+
+              <Link href="/products" className={navLinkClass("/products")} onClick={() => setIsMenuOpen(false)}>
+                Products
+              </Link>
+
+              <Link href="/corporate" className={navLinkClass("/corporate")} onClick={() => setIsMenuOpen(false)}>
+                Corporate
+              </Link>
+
+              <Link href="/about" className={navLinkClass("/about")} onClick={() => setIsMenuOpen(false)}>
+                About
+              </Link>
+
+              <Link href="/contact" className={navLinkClass("/contact")} onClick={() => setIsMenuOpen(false)}>
+                Contact
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );

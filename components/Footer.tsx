@@ -63,8 +63,8 @@ export default function Footer() {
   return (
     <footer className="w-full bg-[#0A3323] text-[#F7F4D5]">
       <div className="w-full px-8 py-16 md:px-16 lg:px-20 lg:py-20">
-        <div className="grid gap-10 lg:grid-cols-[1.15fr_0.8fr_0.8fr_0.8fr]">
-          <div>
+        <div className="grid gap-10 text-center lg:grid-cols-[1.15fr_0.8fr_0.8fr_0.8fr] lg:text-left">
+          <div className="flex flex-col items-center lg:items-start">
             <img
               src="/logo.png"
               alt="The Aumera Gifts"
@@ -82,8 +82,8 @@ export default function Footer() {
             const Icon = section.icon;
 
             return (
-              <div key={section.title}>
-                <div className="mb-4 flex items-center gap-2">
+              <div key={section.title} className="flex flex-col items-center lg:items-start">
+                <div className="mb-4 flex items-center justify-center gap-2 lg:justify-start">
                   <Icon className="h-4 w-4 text-[#839958]" />
                   <h3 className="text-[1.05rem] font-medium tracking-wide text-[#F7F4D5] md:text-[1.4rem]">{section.title}</h3>
                 </div>
