@@ -84,6 +84,6 @@ button:hover {
 
 img {
   max-width: 100%;
-  height: auto;
+  /* height: auto;  Removed as it overrides h-full utility in Tailwind v4 due to unlayered CSS */
   display: block;
 }

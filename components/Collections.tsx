@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export default function Collections() {
   const collections = [
@@ -24,7 +25,7 @@ export default function Collections() {
         "https://images.unsplash.com/photo-1700788629800-ad3a0b202054?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGRpd2FsaSUyMGdpZnRzfGVufDB8fDB8fHww",
     },
     {
-      title: "Personalised Gifts",
+      title: "Personalised",
       desc: "Made specially to create unforgettable memories.",
       href: "/products",
       image:
@@ -33,29 +34,52 @@ export default function Collections() {
   ];
 
   return (
-    <section className="bg-[#F7F4D5] px-8 md:px-20 py-28">
-      <div className="text-center mb-16">
-        <p className="text-[#839958] tracking-[5px] text-sm mb-5">EXPLORE</p>
+    <section className="bg-[#F7F4D5] px-6 sm:px-8 md:px-20 py-24 md:py-32">
+      <div className="max-w-[1400px] mx-auto">
+        
+        <div className="text-center mb-16 md:mb-24">
+          <p className="text-[#839958] tracking-[5px] text-sm mb-5 uppercase font-medium">
+            Explore
+          </p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl text-[#0A3323] leading-tight mb-8">
+            Our Collections
+          </h2>
+        </div>
 
-        <h2 className="text-5xl">Our Collections</h2>
-      </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10">
+          {collections.map((item) => (
+            <Link 
+              key={item.title} 
+              href={item.href}
+              className="group block bg-[#F7F4D5] text-[#0A3323] rounded-[35px] p-4 sm:p-6 luxury-hover"
+            >
+              {/* Image Container with original rounding but taller elegant aspect ratio */}
+              <div className="relative aspect-[3/4] md:aspect-[4/5] rounded-[25px] mb-8 overflow-hidden">
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-[2000ms] ease-out group-hover:scale-110"
+                  style={{ backgroundImage: `url(${item.image})` }}
+                />
+              </div>
 
-      <div className="grid md:grid-cols-4 gap-8">
-        {collections.map((item) => (
-          <div
-            key={item.title}
-            className="bg-[#F7F4D5] text-[#0A3323] rounded-[35px] p-8 luxury-hover"
-          >
-            <div
-              className="h-[280px] rounded-[25px] mb-8 overflow-hidden bg-cover bg-center"
-              style={{ backgroundImage: `url(${item.image})` }}
-            />
+              {/* Text Content */}
+              <div className="text-center px-2">
+                <h3 className="text-3xl text-[#0A3323] mb-4">
+                  {item.title}
+                </h3>
+                <p className="text-[#0A3323]/80 text-base leading-relaxed mb-6">
+                  {item.desc}
+                </p>
+                
+                {/* Elegant subtle interactive element to replace the need for card backgrounds */}
+                <div className="inline-flex items-center justify-center gap-2 text-[#839958] text-sm tracking-[2px] uppercase font-medium group-hover:text-[#0A3323] transition-colors">
+                  <span>Discover</span>
+                  <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
 
-            <h3 className="text-3xl mb-3">{item.title}</h3>
-
-            <p className="mb-4">{item.desc}</p>
-          </div>
-        ))}
       </div>
     </section>
   );

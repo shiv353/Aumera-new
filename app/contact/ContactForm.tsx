@@ -51,7 +51,7 @@ ${form.message}
   };
 
   const inputClass =
-    "rounded-2xl border border-[#CFC58F] bg-[#FBF7E8] px-6 py-4 text-[#0A3323] placeholder:text-[#0A3323]/50 outline-none transition-all duration-300 focus:border-[#839958] focus:bg-[#FFFDF6] focus:ring-2 focus:ring-[#839958]/10";
+    "rounded-2xl border border-[#839958]/30 bg-transparent px-6 py-4 text-[#0A3323] placeholder:text-[#0A3323]/50 outline-none transition-all duration-300 focus:border-[#839958] focus:bg-[#0A3323]/5 focus:ring-2 focus:ring-[#839958]/10";
 
   return (
     <FadeIn>
@@ -81,14 +81,11 @@ ${form.message}
             className="
               rounded-[42px]
               border
-              border-[#D6CB96]
-              bg-gradient-to-br
-              from-[#F8F5E4]
-              via-[#F5F1DD]
-              to-[#EEE8C8]
+              border-[#839958]/30
+              bg-transparent
               p-10
               md:p-14
-              shadow-[0_15px_40px_rgba(10,51,35,0.08)]
+              shadow-[0_15px_40px_rgba(10,51,35,0.03)]
               transition-all
               duration-300
             "

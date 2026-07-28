@@ -66,13 +66,13 @@ export default function Navbar() {
     `;
   };
 
+  const headerClasses = isSolidHeader
+    ? "bg-[#0A3323] shadow-xl py-4"
+    : "bg-[#0A3323] shadow-xl py-4 lg:bg-transparent lg:shadow-none lg:py-6";
+
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        isSolidHeader
-          ? "bg-[#0A3323] shadow-xl py-4"
-          : "bg-transparent py-6"
-      }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${headerClasses}`}
     >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-8 md:px-16">
         <div className="flex items-center justify-between">

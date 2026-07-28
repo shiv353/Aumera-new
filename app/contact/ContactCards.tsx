@@ -15,7 +15,7 @@ export default function ContactCards() {
 
           {/* Phone */}
 
-          <div className="group rounded-[32px] border border-[#839958]/40 bg-[#FCFBF2] p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-[#0A3323] hover:shadow-2xl">
+          <div className="group rounded-[32px] border border-transparent bg-[#0A3323] p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
 
             <Phone
               size={34}
@@ -26,11 +26,11 @@ export default function ContactCards() {
               Call
             </p>
 
-            <h3 className="mb-4 font-serif text-2xl">
+            <h3 className="mb-4 font-serif text-2xl text-[#F7F4D5]">
               Let's Talk
             </h3>
 
-            <p className="leading-8 text-[#0A3323]/75">
+            <p className="leading-8 text-[#F7F4D5]/75">
               +91 70167 31747
             </p>
 
@@ -38,7 +38,7 @@ export default function ContactCards() {
 
           {/* WhatsApp */}
 
-          <div className="group rounded-[32px] border border-[#839958]/40 bg-[#FCFBF2] p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-[#0A3323] hover:shadow-2xl">
+          <div className="group rounded-[32px] border border-transparent bg-[#0A3323] p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
 
             <MessageCircle
               size={34}
@@ -49,11 +49,11 @@ export default function ContactCards() {
               WhatsApp
             </p>
 
-            <h3 className="mb-4 font-serif text-2xl">
+            <h3 className="mb-4 font-serif text-2xl text-[#F7F4D5]">
               Quick Replies
             </h3>
 
-            <p className="leading-8 text-[#0A3323]/75">
+            <p className="leading-8 text-[#F7F4D5]/75">
               Fast responses for all gifting enquiries.
             </p>
 
@@ -61,7 +61,7 @@ export default function ContactCards() {
 
           {/* Location */}
 
-          <div className="group rounded-[32px] border border-[#839958]/40 bg-[#FCFBF2] p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-[#0A3323] hover:shadow-2xl">
+          <div className="group rounded-[32px] border border-transparent bg-[#0A3323] p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
 
             <MapPin
               size={34}
@@ -72,11 +72,11 @@ export default function ContactCards() {
               Location
             </p>
 
-            <h3 className="mb-4 font-serif text-2xl">
+            <h3 className="mb-4 font-serif text-2xl text-[#F7F4D5]">
               Ahmedabad
             </h3>
 
-            <p className="leading-8 text-[#0A3323]/75">
+            <p className="leading-8 text-[#F7F4D5]/75">
               Gujarat, India
             </p>
 
@@ -84,7 +84,7 @@ export default function ContactCards() {
 
           {/* Response */}
 
-          <div className="group rounded-[32px] border border-[#839958]/40 bg-[#FCFBF2] p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-[#0A3323] hover:shadow-2xl">
+          <div className="group rounded-[32px] border border-transparent bg-[#0A3323] p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
 
             <Clock3
               size={34}
@@ -95,11 +95,11 @@ export default function ContactCards() {
               Response
             </p>
 
-            <h3 className="mb-4 font-serif text-2xl">
+            <h3 className="mb-4 font-serif text-2xl text-[#F7F4D5]">
               Within 24 Hours
             </h3>
 
-            <p className="leading-8 text-[#0A3323]/75">
+            <p className="leading-8 text-[#F7F4D5]/75">
               We usually respond on the same day.
             </p>
 
